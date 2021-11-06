@@ -2,8 +2,15 @@ import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useState } from "react";
-import { Image, Pressable, StyleSheet, Text, View, } from "react-native";
-import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { passwordIcons } from "../../assets/buttons/LoginButtons";
 
 const SignUpForm = () => {
@@ -32,7 +39,6 @@ const SignUpForm = () => {
           <TextInput
             placeholderTextColor="#444"
             placeholder="Full Name"
-
             style={{
               width: "80%",
               marginLeft: 10,

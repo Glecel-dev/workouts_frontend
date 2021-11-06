@@ -1,6 +1,6 @@
+import React, { useState } from "react";
 import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
-import React, { useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 

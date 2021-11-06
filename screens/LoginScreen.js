@@ -28,20 +28,22 @@ import { LogBox } from 'react-native';
 
 const LoginScreen = () => {
   const moveAnimation = useRef(new Animated.Value(0)).current;
+
+  const onLogin = async (email, password) => {
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, password);
+      console.log("Login Succesfull with these creds", email, password);
+    } catch (error) {
+      Alert.alert(error.message);
+    }
+  };
   const animate = (name) => {
     setActiveTab(name);
-    if(name==="LOGIN"){
       Animated.timing(moveAnimation, {
-        toValue: 0,
+        toValue: name==='LOGIN'?0:170,
         duration: 200,
       }).start();
-    }
-    else if(name==='SIGNUP'){
-    Animated.timing(moveAnimation, {
-      toValue: 170,
-      duration: 200,
-    }).start();
-    }
+
   };
   const [activeTab, setActiveTab] = useState("LOGIN");
 
@@ -59,7 +61,7 @@ const LoginScreen = () => {
     ;
   } else {
     return (
-      <SafeAreaView style={(styles.container, SafeViewAndroid.AndroidSafeArea)}>
+      <SafeAreaView style={[styles.container, SafeViewAndroid.AndroidSafeArea]}>
         <View style={styles.wrapper}>
           <View style={styles.logoContainer}>
             {/* <Image/> */}
@@ -98,10 +100,7 @@ const LoginScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "red",
-    flex: 1,
-  },
+
   wrapper: {
     marginTop: 80,
     marginHorizontal: 20,

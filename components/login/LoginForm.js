@@ -2,18 +2,33 @@ import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useState } from "react";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
-import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 import { passwordIcons } from "../../assets/buttons/LoginButtons";
+import { Formik } from "formik";
+import * as yup from "yup";
+import Validator from "email-validator";
 
 
 const LoginForm = () => {
+  const loginFormSchema = yup.object().shape({
+    email: yup.string().email().required("An email address is required"),
+    password: yup
+      .string()
+      .required()
+      .min(6, "your password has to have at least 6 characters"),
+  });
+
   const [visible, setVisible] = useState(true);
-  const handleSubmit = (e) => {
-    console.log(e);
-  };
   let [fontsLoaded] = useFonts({
-    'Poppins': require("../../assets/fonts/Poppins-ExtraLight.ttf"),
+    Poppins: require("../../assets/fonts/Poppins-ExtraLight.ttf"),
   });
 
   if (!fontsLoaded) {
@@ -22,76 +37,118 @@ const LoginForm = () => {
   } else {
     return (
       <View style={styles.wrapper}>
-        <Text style={styles.labelField}>Email</Text>
-        <View style={styles.inputFields}>
-          <Image
-            source={{
-              uri: "https://img.icons8.com/ios/100/1ABC9C/new-post.png",
-            }}
-            style={styles.fieldIcons}
-          />
-          <TextInput 
-            placeholderTextColor="#444"
-            placeholder="E-mail address"
-            autoCapitalize="none"
-            keyboardType="email-address"
-            textContentType="emailAddress"
-            autoFocus={true}
-            style={{width:'80%', marginLeft:10, color:'white', fontFamily:'Poppins'}}
-
-          />
-        </View>
-        <Text style={styles.labelField}>Password</Text>
-        <View style={styles.inputFields}>
-          <Image
-            source={{ uri: "https://img.icons8.com/ios/100/1ABC9C/lock.png" }}
-            style={styles.fieldIcons}
-          />
-          <TextInput
-            placeholderTextColor="#444"
-            placeholder="Password"
-            autoCapitalize="none"
-            autoCorrect={false}
-            secureTextEntry={visible}
-            textContentType="password"
-            style={{width:'80%', marginLeft:10, color:'white', fontFamily:'Poppins'}}
-          />
-          <TouchableOpacity
-            style={{ alignItems: "center" }}
-            onPress={() => setVisible(!visible)}
-          >
-            <Image
-              source={{
-                uri: visible ? passwordIcons.active : passwordIcons.inactive,
-              }}
-              style={styles.seePasswordIcon}
-            />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.additionalFields}>
-          <Text style={styles.labelField}>Remember Me</Text>
-          <TouchableOpacity>
-            <Text style={styles.labelField}>Forgot your password?</Text>
-          </TouchableOpacity>
-        </View>
-        {/* <View style={styles.buttonField}> */}
-        <LinearGradient
-          // Button Linear Gradient
-          colors={["#1ABC9C", "#0096FF"]}
-          start={[0.0, 0.5]}
-          end={[1.0, 0.5]}
-          locations={[0.0, 1.0]}
-          style={styles.buttonField}
+        <Formik
+          initialValues={{ email: "", password: "" }}
+          onSubmit={(values) => {
+            console.log(values);
+            // onLogin(values.email, values.password);
+          }}
+          validationSchema={loginFormSchema}
+          validateOnMount={true}
         >
-          <Pressable
-            onPress={handleSubmit}
-            titleSize={20}
-            //   disabled={!isValid}
-          >
-            <Text style={styles.buttonText}>Log In</Text>
-          </Pressable>
-        </LinearGradient>
-
+          {({ handleChange, handleBlur, handleSubmit, values, isValid }) => (
+            <>
+              <Text style={styles.labelField}>Email</Text>
+              <View style={[styles.inputFields,                {
+                  borderColor:
+                    values.email.length < 1 || Validator.validate(values.email)
+                      ? "#444"
+                      : "red",
+                }]}>
+                <Image
+                  source={{
+                    uri: "https://img.icons8.com/ios/100/1ABC9C/new-post.png",
+                  }}
+                  style={styles.fieldIcons}
+                />
+                <TextInput
+                  placeholderTextColor="#444"
+                  placeholder="E-mail address"
+                  autoCapitalize="none"
+                  keyboardType="email-address"
+                  textContentType="emailAddress"
+                  autoFocus={false}
+                  onChangeText={handleChange("email")}
+                  onBlur={handleBlur("email")}
+                  value={values.email}
+                  style={{
+                    width: "80%",
+                    marginLeft: 10,
+                    color: "white",
+                    fontFamily: "Poppins",
+                  }}
+                />
+              </View>
+              <Text style={styles.labelField}>Password</Text>
+              <View style={[styles.inputFields,  {
+                  borderColor:
+                    values.password.length < 1 || values.password.length >= 6
+                      ? "#444"
+                      : "red",
+                }]}>
+                <Image
+                  source={{
+                    uri: "https://img.icons8.com/ios/100/1ABC9C/lock.png",
+                  }}
+                  style={styles.fieldIcons}
+                />
+                <TextInput
+                  placeholderTextColor="#444"
+                  placeholder="Password"
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  secureTextEntry={visible}
+                  textContentType="password"
+                  onChangeText={handleChange("password")}
+                  onBlur={handleBlur("password")}
+                  value={values.password}
+                  style={{
+                    width: "80%",
+                    marginLeft: 10,
+                    color: "white",
+                    fontFamily: "Poppins",
+                  }}
+                />
+                <TouchableOpacity
+                  style={{ alignItems: "center" }}
+                  onPress={() => setVisible(!visible)}
+                >
+                  <Image
+                    source={{
+                      uri: visible
+                        ? passwordIcons.active
+                        : passwordIcons.inactive,
+                    }}
+                    style={styles.seePasswordIcon}
+                  />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.additionalFields}>
+                <Text style={styles.labelField}>Remember Me</Text>
+                <TouchableOpacity>
+                  <Text style={styles.labelField}>Forgot your password?</Text>
+                </TouchableOpacity>
+              </View>
+              {/* <View style={styles.buttonField}> */}
+              <LinearGradient
+                // Button Linear Gradient
+                colors={["#1ABC9C", "#0096FF"]}
+                start={[0.0, 0.5]}
+                end={[1.0, 0.5]}
+                locations={[0.0, 1.0]}
+                style={styles.buttonField}
+              >
+                <Pressable
+                  onPress={handleSubmit}
+                  titleSize={20}
+                  //   disabled={!isValid}
+                >
+                  <Text style={styles.buttonText}>Log In</Text>
+                </Pressable>
+              </LinearGradient>
+            </>
+          )}
+        </Formik>
         {/* </View> */}
       </View>
     );
