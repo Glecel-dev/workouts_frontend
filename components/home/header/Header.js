@@ -3,7 +3,7 @@ import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
-
+import { onLogout } from "../../../services/baseServices/BaseApiKit";
 export default function Header() {
   const [selectedMonth, setSelectedMonth] = useState(null);
 
@@ -22,7 +22,7 @@ export default function Header() {
             <Text style={styles.headerUpText}>Welcome</Text>
             <Text style={styles.headerText}>Gledi</Text>
           </View>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={onLogout}>
             <Image
               source={{
                 uri: "https://i.pinimg.com/280x280_RS/b0/40/92/b04092899c323bb1775837cc9db850f3.jpg",

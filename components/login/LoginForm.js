@@ -1,32 +1,28 @@
+import Validator from "email-validator";
 import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
 import { LinearGradient } from "expo-linear-gradient";
+import { Formik } from "formik";
 import React, { useState } from "react";
 import {
   Image,
-  Pressable,
   StyleSheet,
   Text,
-  View,
   TextInput,
   TouchableOpacity,
+  View,
 } from "react-native";
-import { passwordIcons } from "../../assets/buttons/LoginButtons";
-import { Formik } from "formik";
 import * as yup from "yup";
-import Validator from "email-validator";
-
-
+import { passwordIcons } from "../../assets/buttons/LoginButtons";
+import { onLogin } from "../../services/baseServices/BaseApiKit";
 const LoginForm = () => {
+  const [visible, setVisible] = useState(true);
+
   const loginFormSchema = yup.object().shape({
     email: yup.string().email().required("An email address is required"),
-    password: yup
-      .string()
-      .required()
-      .min(6, "your password has to have at least 6 characters"),
+    password: yup.string().required(),
+    // .min(6, "your password has to have at least 6 characters"),
   });
-
-  const [visible, setVisible] = useState(true);
   let [fontsLoaded] = useFonts({
     Poppins: require("../../assets/fonts/Poppins-ExtraLight.ttf"),
   });
@@ -41,7 +37,7 @@ const LoginForm = () => {
           initialValues={{ email: "", password: "" }}
           onSubmit={(values) => {
             console.log(values);
-            // onLogin(values.email, values.password);
+            onLogin(values.email, values.password);
           }}
           validationSchema={loginFormSchema}
           validateOnMount={true}
@@ -49,12 +45,18 @@ const LoginForm = () => {
           {({ handleChange, handleBlur, handleSubmit, values, isValid }) => (
             <>
               <Text style={styles.labelField}>Email</Text>
-              <View style={[styles.inputFields,                {
-                  borderColor:
-                    values.email.length < 1 || Validator.validate(values.email)
-                      ? "#444"
-                      : "red",
-                }]}>
+              <View
+                style={[
+                  styles.inputFields,
+                  {
+                    borderColor:
+                      values.email.length < 1 ||
+                      Validator.validate(values.email)
+                        ? "#444"
+                        : "red",
+                  },
+                ]}
+              >
                 <Image
                   source={{
                     uri: "https://img.icons8.com/ios/100/1ABC9C/new-post.png",
@@ -80,12 +82,17 @@ const LoginForm = () => {
                 />
               </View>
               <Text style={styles.labelField}>Password</Text>
-              <View style={[styles.inputFields,  {
-                  borderColor:
-                    values.password.length < 1 || values.password.length >= 6
-                      ? "#444"
-                      : "red",
-                }]}>
+              <View
+                style={[
+                  styles.inputFields,
+                  {
+                    borderColor:
+                      values.password.length < 1 || values.password.length >= 6
+                        ? "#444"
+                        : "red",
+                  },
+                ]}
+              >
                 <Image
                   source={{
                     uri: "https://img.icons8.com/ios/100/1ABC9C/lock.png",
@@ -136,15 +143,29 @@ const LoginForm = () => {
                 start={[0.0, 0.5]}
                 end={[1.0, 0.5]}
                 locations={[0.0, 1.0]}
-                style={styles.buttonField}
+                style={{
+                  width: 200,
+                  marginLeft: 60,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  top: 50,
+                  shadowColor: "white",
+                  shadowRadius: 2.67,
+                  shadowOffset: { width: 2, height: 5 },
+                  shadowOpacity: 8.97,
+                  elevation: 6,
+                  zIndex: 1,
+                  borderRadius: 20,
+                }}
               >
-                <Pressable
+                <TouchableOpacity
                   onPress={handleSubmit}
                   titleSize={20}
                   //   disabled={!isValid}
+                  style={styles.buttonField}
                 >
                   <Text style={styles.buttonText}>Log In</Text>
-                </Pressable>
+                </TouchableOpacity>
               </LinearGradient>
             </>
           )}
@@ -185,20 +206,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   buttonField: {
-    position: "absolute",
-    top: 250,
+    // position: "absolute",
+    // top: 250,
     width: 240,
-    marginLeft: 40,
+    // marginLeft: 40,
     height: 45,
-    backgroundColor: "#1ABC9C",
+    backgroundColor: "transparent",
     borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",
-    shadowColor: "white",
-    shadowRadius: 2.67,
-    shadowOffset: { width: 2, height: 5 },
-    shadowOpacity: 8.97,
-    elevation: 6,
   },
   button: {
     width: 60,

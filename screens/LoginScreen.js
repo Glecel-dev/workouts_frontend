@@ -14,7 +14,7 @@ import { Divider } from "react-native-elements";
 import LoginForm from "../components/login/LoginForm";
 import SignUpForm from "../components/signUp/SignUpForm";
 import SafeViewAndroid from "../styles/SafeViewAndroid";
-
+import { onLogin } from "../services/baseServices/BaseApiKit";
 const OPTIONS = [
   {
     name: "LOGIN",
@@ -29,14 +29,7 @@ import { LogBox } from 'react-native';
 const LoginScreen = () => {
   const moveAnimation = useRef(new Animated.Value(0)).current;
 
-  const onLogin = async (email, password) => {
-    try {
-      await firebase.auth().signInWithEmailAndPassword(email, password);
-      console.log("Login Succesfull with these creds", email, password);
-    } catch (error) {
-      Alert.alert(error.message);
-    }
-  };
+
   const animate = (name) => {
     setActiveTab(name);
       Animated.timing(moveAnimation, {
@@ -100,7 +93,10 @@ const LoginScreen = () => {
 };
 
 const styles = StyleSheet.create({
-
+  container: {
+    backgroundColor: "transparent",
+    flex: 1,
+  },
   wrapper: {
     marginTop: 80,
     marginHorizontal: 20,
