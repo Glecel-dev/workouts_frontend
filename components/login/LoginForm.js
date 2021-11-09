@@ -5,6 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Formik } from "formik";
 import React, { useState } from "react";
 import {
+  Alert,
   Image,
   StyleSheet,
   Text,
@@ -14,8 +15,13 @@ import {
 } from "react-native";
 import * as yup from "yup";
 import { passwordIcons } from "../../assets/buttons/LoginButtons";
+import { getItem, setItem } from "../../SecureStore";
 import { onLogin } from "../../services/baseServices/BaseApiKit";
-const LoginForm = () => {
+import { AuthContext } from "../context";
+
+const LoginForm = ({ navigation }) => {
+  const { signIn } = React.useContext(AuthContext);
+
   const [visible, setVisible] = useState(true);
 
   const loginFormSchema = yup.object().shape({
@@ -35,9 +41,26 @@ const LoginForm = () => {
       <View style={styles.wrapper}>
         <Formik
           initialValues={{ email: "", password: "" }}
-          onSubmit={(values) => {
-            console.log(values);
-            onLogin(values.email, values.password);
+          onSubmit={async (values) => {
+            // console.log(values);
+            try {
+              await onLogin(values.email, values.password)
+                .then(
+                  (response) => {
+                    console.log(response);
+                    response
+                      ? signIn(response)
+                      : Alert.alert(
+                          "Error:",
+                          "Your credentials are not correct"
+                        );
+                  }
+                  // signIn(response)}
+                )
+                .then((await getItem()) ? navigation.push("Home") : null);
+            } catch (error) {
+              Alert.alert("Error:", error.message);
+            }
           }}
           validationSchema={loginFormSchema}
           validateOnMount={true}

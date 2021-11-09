@@ -6,10 +6,10 @@ import BottomTabs from "../components/home/bottomTabs/BottomTabs";
 import Header from "../components/home/header/Header";
 import WorkoutList from "../components/home/workoutList/WorkoutList";
 import SafeViewAndroid from "../styles/SafeViewAndroid";
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   return (
     <SafeAreaView style={[SafeViewAndroid.AndroidSafeArea, styles.container]}>
-      <Header />
+      <Header navigation={navigation} />
       <WorkoutList />
       <BodyPartsList />
       <BottomTabs icons={bottomTabsIcons} />

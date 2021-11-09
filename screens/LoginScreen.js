@@ -26,7 +26,7 @@ const OPTIONS = [
 import { LogBox } from 'react-native';
 
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
   const moveAnimation = useRef(new Animated.Value(0)).current;
 
 
@@ -84,7 +84,7 @@ const LoginScreen = () => {
               style={[styles.scroll, { marginLeft: moveAnimation }]}
             ></Animated.View>
             <Divider width={1} orientation={"horizontal"} />
-            {activeTab == "LOGIN" ? <LoginForm /> : <SignUpForm />}
+            {activeTab == "LOGIN" ? <LoginForm navigation={navigation}/> : <SignUpForm />}
           </View>
         </View>
       </SafeAreaView>

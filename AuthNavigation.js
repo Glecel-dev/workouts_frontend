@@ -1,34 +1,42 @@
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import { LinearGradient } from "expo-linear-gradient";
-import * as SecureStore from "expo-secure-store";
-import React, { useEffect, useState } from "react";
+import React, { useEffect ,useState} from "react";
 import { StyleSheet } from "react-native";
-import { SignedInStack, SignedOutStack } from "./navigation";
+import HomeScreen from "./screens/HomeScreen";
+import LoginScreen from "./screens/LoginScreen";
+import { getItem } from "./SecureStore";
 
 export default function AuthNavigation() {
-  const [currentUser, setCurrentUser] = useState(null);
-  const userHandler = (user) => {
-    user ? setCurrentUser(user) : setCurrentUser(null);
-    // console.log(user)
+  const Stack = createStackNavigator();
+  const [loggedIn, setLoggedIn] = useState(false);
+  const screenOptions = {
+    headerShown: false,
   };
-
-   async function getUser() {
-    const user = await SecureStore.getItemAsync("access");
-    setCurrentUser(user)
-    return user
+  const mainTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: "transparent",
+    },
   };
-
-  useEffect(() => 
-    // const user = await SecureStore.getItemAsync("username");
-    setCurrentUser(getUser())
-    // console.log(currentUser)
-  , []);
-
+  useEffect(async () => {
+    await getItem().then((res) =>
+    console.log(res)
+      // res ? setLoggedIn(true):setLoggedIn
+    );
+  }, []);
   return (
     <LinearGradient
       colors={["#141e30", "#0f0c29", "#0f0c29"]}
       style={styles.background}
     >
-      {currentUser ? <SignedInStack /> : <SignedOutStack />}
+      <NavigationContainer theme={mainTheme}>
+        <Stack.Navigator initialRouteName="ROOT" screenOptions={screenOptions}>
+          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Login" component={LoginScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </LinearGradient>
   );
 }

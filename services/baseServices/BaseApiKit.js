@@ -1,6 +1,8 @@
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 import { Alert } from "react-native";
+import { removeItem, setItem } from "../../SecureStore";
+import { useAuthorization } from "../../AuthProvider";
 
 let BaseApiKit = axios.create({
   baseURL: "http://10.0.2.2:8000",
@@ -16,37 +18,27 @@ export const setClientToken = (token) => {
     return config;
   });
 };
-async function saveTokenData(key, value) {
-  await SecureStore.setItemAsync(key, value);
-}
+
 export const onLogin = async (email, password) => {
+  let token
   await BaseApiKit.post("/auth/knock-knock/", {
     email: email,
     password: password,
   })
     .then((response) => {
-      Object.keys(response.data).map(function (key, index) {
-        saveTokenData(key, JSON.stringify(response.data[key]));
-      });
-
-      setClientToken(response.access);
+      setClientToken(response.data.access);
+      token = response.data.access
+      
     })
     .catch((error) => console.log(error));
+    return token
 };
-export const onLogout =async ()=>{
-  try{
-  await SecureStore.deleteItemAsync('access')
-  await SecureStore.deleteItemAsync('username')
-  await SecureStore.deleteItemAsync('full_name')
-  await SecureStore.deleteItemAsync('refresh')
-  await SecureStore.deleteItemAsync('weight')
-  await SecureStore.deleteItemAsync('height')
-
+export const onLogout = async () => {
+  try {
+    removeItem;
+  } catch (error) {
+    Alert.alert(error);
   }
-  catch(error){
-    Alert.alert(error)
-  }
-}
-
+};
 
 export default BaseApiKit;

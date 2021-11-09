@@ -1,10 +1,26 @@
 import React, { useState } from "react";
 import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 import { onLogout } from "../../../services/baseServices/BaseApiKit";
-export default function Header() {
+import { getItem, removeItem } from "../../../SecureStore";
+import { AuthContext } from "../../context";
+
+export default function Header({ navigation }) {
+  const { signOut } = React.useContext(AuthContext);
+
+  const onLogout = async () => {
+    try {
+      await signOut()
+      // const token = await getItem()
+      // !await getItem()?navigation.push('Login'):null
+      console.log(await getItem())
+
+    } catch (error) {
+      Alert.alert(error);
+    }
+  };
   const [selectedMonth, setSelectedMonth] = useState(null);
 
   let [fontsLoaded] = useFonts({
