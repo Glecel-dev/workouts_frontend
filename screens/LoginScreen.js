@@ -14,7 +14,6 @@ import { Divider } from "react-native-elements";
 import LoginForm from "../components/login/LoginForm";
 import SignUpForm from "../components/signUp/SignUpForm";
 import SafeViewAndroid from "../styles/SafeViewAndroid";
-import { onLogin } from "../services/baseServices/BaseApiKit";
 const OPTIONS = [
   {
     name: "LOGIN",
@@ -43,9 +42,7 @@ const LoginScreen = ({navigation}) => {
   let [fontsLoaded] = useFonts({
     Poppins: require("../assets/fonts/Poppins-ExtraLight.ttf"),
   });
-  const handleChnageTextColor = (e) => {
-    setTextColor(textColor === "black" ? "#CCCCCC" : "black");
-  };
+
   useEffect(() => {
     LogBox.ignoreLogs(['Animated: `useNativeDriver`']);
 }, [])

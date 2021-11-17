@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     top:140,
     backgroundColor: "transparent",
     width:'100%',
-    height:160
+    height:160,
   },
 });
 

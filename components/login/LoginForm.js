@@ -15,7 +15,6 @@ import {
 } from "react-native";
 import * as yup from "yup";
 import { passwordIcons } from "../../assets/buttons/LoginButtons";
-import { getItem, setItem } from "../../SecureStore";
 import { onLogin } from "../../services/baseServices/BaseApiKit";
 import { AuthContext } from "../context";
 
@@ -44,20 +43,15 @@ const LoginForm = ({ navigation }) => {
           onSubmit={async (values) => {
             // console.log(values);
             try {
-              await onLogin(values.email, values.password)
-                .then(
-                  (response) => {
-                    console.log(response);
-                    response
-                      ? signIn(response)
-                      : Alert.alert(
-                          "Error:",
-                          "Your credentials are not correct"
-                        );
-                  }
-                  // signIn(response)}
-                )
-                .then((await getItem()) ? navigation.push("Home") : null);
+              await onLogin(values.email, values.password).then(
+                (response) => {
+                  console.log(response);
+                  response
+                    ? signIn(response)
+                    : Alert.alert("Error:", "Your credentials are not correct");
+                }
+                // signIn(response)}
+              );
             } catch (error) {
               Alert.alert("Error:", error.message);
             }

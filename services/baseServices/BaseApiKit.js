@@ -1,8 +1,7 @@
 import axios from "axios";
-import * as SecureStore from "expo-secure-store";
+import React from "react";
 import { Alert } from "react-native";
-import { removeItem, setItem } from "../../SecureStore";
-import { useAuthorization } from "../../AuthProvider";
+import { AuthContext } from "../../components/context";
 
 let BaseApiKit = axios.create({
   baseURL: "http://10.0.2.2:8000",
@@ -20,25 +19,45 @@ export const setClientToken = (token) => {
 };
 
 export const onLogin = async (email, password) => {
-  let token
+
+  let token;
   await BaseApiKit.post("/auth/knock-knock/", {
     email: email,
     password: password,
   })
     .then((response) => {
       setClientToken(response.data.access);
-      token = response.data.access
-      
+      token = response.data.access;
     })
     .catch((error) => console.log(error));
     return token
 };
 export const onLogout = async () => {
+
   try {
-    removeItem;
+    setClientToken(null);
   } catch (error) {
     Alert.alert(error);
   }
 };
+
+export const onSignUp=async()=>{
+  let token
+  await BaseApiKit.post('user/',{
+    full_name:full_name,
+    username:username,
+    email: email,
+    weight:weight,
+    height:height,
+    password: password,
+
+  })    
+  .then((response) => {
+    setClientToken(response.data.access);
+    token = response.data.access;
+  })
+  .catch((error) => console.log(error));
+  return token
+}
 
 export default BaseApiKit;

@@ -3,16 +3,15 @@ import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
 import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
-import { onLogout } from "../../../services/baseServices/BaseApiKit";
+import { onLogout, setClientToken } from "../../../services/baseServices/BaseApiKit";
 import { getItem, removeItem } from "../../../SecureStore";
 import { AuthContext } from "../../context";
-
 export default function Header({ navigation }) {
-  const { signOut } = React.useContext(AuthContext);
-
+  const {signOut} = React.useContext(AuthContext)
   const onLogout = async () => {
     try {
-      await signOut()
+       setClientToken(null)
+      signOut()
       // const token = await getItem()
       // !await getItem()?navigation.push('Login'):null
       console.log(await getItem())

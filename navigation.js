@@ -19,21 +19,21 @@ const mainTheme = {
 export const SignedInStack = () => (
   <NavigationContainer theme={mainTheme}>
     <Stack.Navigator
-      initialRouteName="homeScreen"
+      initialRouteName="Home"
       screenOptions={screenOptions}
       
     >
-      <Stack.Screen name="homeScreen" component={HomeScreen} />
+      <Stack.Screen name="Home" component={HomeScreen} />
     </Stack.Navigator>
   </NavigationContainer>
 );
 export const SignedOutStack = () => (
   <NavigationContainer theme={mainTheme}>
     <Stack.Navigator
-      initialRouteName="loginScreen"
+      initialRouteName="Login"
       screenOptions={screenOptions}
     >
-      <Stack.Screen name="loginScreen" component={LoginScreen} />
+      <Stack.Screen name="Login" component={LoginScreen} />
     </Stack.Navigator>
   </NavigationContainer>
 );

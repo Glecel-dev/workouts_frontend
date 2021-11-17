@@ -23,7 +23,8 @@ const styles = StyleSheet.create({
       top:300,
       backgroundColor: "transparent",
       width:'100%',
-      height:'100%',
+      height:480,
+      
     },
   });
 export default BodyPartsList
