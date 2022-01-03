@@ -2,8 +2,7 @@ import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useState } from "react";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
-import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
+import { Image, Pressable, StyleSheet, Text, View ,TextInput,TouchableOpacity} from "react-native";
 import { passwordIcons } from "../../assets/buttons/LoginButtons";
 
 

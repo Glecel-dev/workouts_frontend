@@ -1,5 +1,6 @@
 import React from "react";
-import { SafeAreaView, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
+import SafeAreaView from 'react-native-safe-area-view';
 import { bottomTabsIcons } from "../assets/buttons/BottomButtons";
 import BodyPartsList from "../components/home/bodyPartsStatistics/BodyPartsList";
 import BottomTabs from "../components/home/bottomTabs/BottomTabs";
