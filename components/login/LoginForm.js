@@ -11,7 +11,7 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
 import * as yup from "yup";
 import { passwordIcons } from "../../assets/buttons/LoginButtons";

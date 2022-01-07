@@ -1,12 +1,12 @@
 import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
-import React, { useState, useRef ,useEffect} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
+  Animated,
+  LogBox,
   SafeAreaView,
   StyleSheet,
   Text,
-  Dimensions,
-  Animated,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -22,20 +22,16 @@ const OPTIONS = [
     name: "SIGNUP",
   },
 ];
-import { LogBox } from 'react-native';
 
-
-const LoginScreen = ({navigation}) => {
+const LoginScreen = ({ navigation }) => {
   const moveAnimation = useRef(new Animated.Value(0)).current;
-
 
   const animate = (name) => {
     setActiveTab(name);
-      Animated.timing(moveAnimation, {
-        toValue: name==='LOGIN'?0:170,
-        duration: 200,
-      }).start();
-
+    Animated.timing(moveAnimation, {
+      toValue: name === "LOGIN" ? 0 : 170,
+      duration: 200,
+    }).start();
   };
   const [activeTab, setActiveTab] = useState("LOGIN");
 
@@ -44,11 +40,10 @@ const LoginScreen = ({navigation}) => {
   });
 
   useEffect(() => {
-    LogBox.ignoreLogs(['Animated: `useNativeDriver`']);
-}, [])
+    LogBox.ignoreLogs(["Animated: `useNativeDriver`"]);
+  }, []);
   if (!fontsLoaded) {
     return <AppLoading />;
-    ;
   } else {
     return (
       <SafeAreaView style={[styles.container, SafeViewAndroid.AndroidSafeArea]}>
@@ -81,7 +76,11 @@ const LoginScreen = ({navigation}) => {
               style={[styles.scroll, { marginLeft: moveAnimation }]}
             ></Animated.View>
             <Divider width={1} orientation={"horizontal"} />
-            {activeTab == "LOGIN" ? <LoginForm navigation={navigation}/> : <SignUpForm />}
+            {activeTab == "LOGIN" ? (
+              <LoginForm navigation={navigation} />
+            ) : (
+              <SignUpForm />
+            )}
           </View>
         </View>
       </SafeAreaView>
@@ -131,7 +130,7 @@ const styles = StyleSheet.create({
   scroll: {
     position: "absolute",
     top: 50,
-    left:63,
+    left: 63,
     // left: 233,
     width: 70,
     height: 8,

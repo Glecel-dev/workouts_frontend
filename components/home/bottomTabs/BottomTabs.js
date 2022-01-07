@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 
-export default function BottomTabs({ icons }) {
+export default function BottomTabs({ icons, active }) {
   const [activeTab, setActiveTab] = useState("Home");
   const Icon = ({ icon }) => (
-    <TouchableOpacity onPress={() => setActiveTab(icon.name)}>
+    <TouchableOpacity
+      onPress={() => {
+        
+        setActiveTab(icon.name);
+        active = icon.name
+      }}
+    >
       <Image
         source={{ uri: activeTab === icon.name ? icon.active : icon.inactive }}
         style={[styles.icon]}
