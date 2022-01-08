@@ -5,10 +5,9 @@ export default function BottomTabs({ icons, active }) {
   const [activeTab, setActiveTab] = useState("Home");
   const Icon = ({ icon }) => (
     <TouchableOpacity
+    onPressOut={active}
       onPress={() => {
-        
         setActiveTab(icon.name);
-        active = icon.name
       }}
     >
       <Image
