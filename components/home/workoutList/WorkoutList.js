@@ -21,7 +21,7 @@ const WorkoutList = () => {
 const styles = StyleSheet.create({
   wrapper: {
     position:'absolute',
-    top:140,
+    top:110,
     backgroundColor: "transparent",
     width:'100%',
     height:160,

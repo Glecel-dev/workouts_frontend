@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   wrapper: {
-    marginTop: 80,
+    marginTop: 30,
     marginHorizontal: 20,
   },
   logoContainer: {

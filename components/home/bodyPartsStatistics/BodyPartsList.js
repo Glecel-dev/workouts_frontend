@@ -20,10 +20,10 @@ const BodyPartsList = () => {
 const styles = StyleSheet.create({
     wrapper: {
     position:'absolute',
-      top:300,
+      top:270,
       backgroundColor: "transparent",
       width:'100%',
-      height:480,
+      height:520,
       
     },
   });

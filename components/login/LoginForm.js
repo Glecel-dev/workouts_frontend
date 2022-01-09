@@ -153,7 +153,6 @@ const LoginForm = ({ navigation }) => {
                   <Text style={styles.labelField}>Forgot your password?</Text>
                 </TouchableOpacity>
               </View>
-              {/* <View style={styles.buttonField}> */}
               <LinearGradient
                 // Button Linear Gradient
                 colors={["#1ABC9C", "#0096FF"]}

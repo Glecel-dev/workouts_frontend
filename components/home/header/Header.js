@@ -28,7 +28,7 @@ export default function Header({ navigation }) {
 
   if (!fontsLoaded) {
     return <AppLoading />;
-    r;
+    
   } else {
     return (
       <View style={styles.wrapper}>
@@ -46,7 +46,7 @@ export default function Header({ navigation }) {
             />
           </TouchableOpacity>
         </View>
-        <View style={styles.summaryContainer}>
+        {/* <View style={styles.summaryContainer}>
           <Text style={styles.summaryText}>Your workout summary</Text>
 
           <View style={styles.pickerContainer}>
@@ -76,7 +76,7 @@ export default function Header({ navigation }) {
               ]}
             />
           </View>
-        </View>
+        </View> */}
       </View>
     );
   }
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: "rgba(9,7,25,0.4)",
     borderRadius: 13,
-    paddingBottom: 30,
+    paddingBottom: 10,
     paddingTop: 30,
     position: "absolute",
     width: "100%",

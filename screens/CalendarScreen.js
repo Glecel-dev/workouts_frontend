@@ -1,51 +1,60 @@
-import React ,{useState}from "react";
+import AppLoading from "expo-app-loading";
+import { useFonts } from "expo-font";
+import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { Calendar,CalendarList,Agenda } from "react-native-calendars";
+import CalendarPicker from "react-native-calendar-picker";
+import CalendarWorkoutCardRecap from "../components/home/calendar/CalendarWorkoutCardRecap";
 
-const CalendarScreen = () => {
-    const [selectedDate, setSelectedDate] = useState(null);
-  const theme = {
-    backgroundColor: "blue",
-  };
-  return (
-    <View style={styles.wrapper}>
-      <Agenda
-    //   markedDates={selectedDate}
-        minDate={'2012-05-10'}
-        maxDate={"2050-05-30"}
+export default function CalendarScreen() {
+  const [selectedStartDate, setSelectedStartDate] = useState(null);
+  let [fontsLoaded] = useFonts({
+    Poppins: require("../assets/fonts/Poppins-ExtraLight.ttf"),
+  });
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+    return (
+      <View style={styles.wrapper}>
+        <View style={styles.calendarContainer}>
+          <CalendarPicker
+            onDateChange={setSelectedStartDate}
+            todayBackgroundColor="black"
+            selectedDayColor="#1ABC9C"
+            selectedDayTextColor="white"
+            allowRangeSelection={false}
+            headerWrapperStyle={{
+              backgroundColor: "transparent",
+              color: "#1ABC9C",
+            }}
+            textStyle={{
+              fontFamily: "Poppins",
+              color: "white",
+            }}
+            dayLabelsWrapper={{ borderColor: "#1ABC9C" }}
+          />
+        </View>
+        <CalendarWorkoutCardRecap/>
 
-        theme={{
-          backgroundColor: "transparent",
-          calendarBackground: "transparent",
-          
-          selectedDayBackgroundColor: "#1ABC9C",
-          selectedDayTextColor: "#1ABC9C",
-          todayTextColor: "white",
-
-          monthTextColor: '#1ABC9C',
-          dotColor: "#1ABC9C",
-          textMonthFontSize: 20,
-          selectedDotColor: '#1ABC9C',
-
-
-        }}
-        // onDayPress={(day) => {
-        //   setSelectedDate({day:{marked:true, dotColor:'#1ABC9C'}})
-        //   console.log(day.dateString)
-        //   console.log(selectedDate)
-        // }}
-
-      />
-    </View>
-  );
-};
+      </View>
+    );
+  }
+}
 const styles = StyleSheet.create({
   wrapper: {
     position: "absolute",
-    top: 190,
+    top: 120,
     backgroundColor: "transparent",
     width: "100%",
-    height:'100%'
+    height: "100%",
+  },
+  calendarContainer: {
+    margin: 5,
+    borderRadius: 10,
+    backgroundColor: "rgba(191, 191, 191, 0.15)",
+    padding: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    borderColor: "rgba(191, 191, 191, 0.2)",
+    borderWidth: 2,
   },
 });
-export default CalendarScreen;
