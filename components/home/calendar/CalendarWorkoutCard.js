@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
   workoutImage: {
     width: 23,
     height: 23,
-    height: 23,
   },
   workoutTextwrapper:{
       display:'flex',

@@ -43,9 +43,10 @@ const LoginForm = ({ navigation }) => {
           onSubmit={async (values) => {
             // console.log(values);
             try {
+              console.log(values.email, values.password)
               await onLogin(values.email, values.password).then(
                 (response) => {
-                  console.log(response);
+                  // console.log(response);
                   response
                     ? signIn(response)
                     : Alert.alert("Error:", "Your credentials are not correct");
