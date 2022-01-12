@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import CalendarPicker from "react-native-calendar-picker";
 import CalendarWorkoutCardRecap from "../components/home/calendar/CalendarWorkoutCardRecap";
-
-export default function CalendarScreen() {
+import Header from '../components/home/header/Header'
+export default function CalendarScreen({navigation}) {
   const [selectedStartDate, setSelectedStartDate] = useState(null);
   let [fontsLoaded] = useFonts({
     Poppins: require("../assets/fonts/Poppins-ExtraLight.ttf"),
@@ -15,6 +15,8 @@ export default function CalendarScreen() {
   } else {
     return (
       <View style={styles.wrapper}>
+              <Header navigation={navigation} />
+
         <View style={styles.calendarContainer}>
           <CalendarPicker
             onDateChange={setSelectedStartDate}
@@ -41,13 +43,14 @@ export default function CalendarScreen() {
 }
 const styles = StyleSheet.create({
   wrapper: {
-    position: "absolute",
-    top: 120,
     backgroundColor: "transparent",
     width: "100%",
     height: "100%",
   },
   calendarContainer: {
+
+    top: 120,
+
     margin: 5,
     borderRadius: 10,
     backgroundColor: "rgba(191, 191, 191, 0.15)",

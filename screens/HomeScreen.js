@@ -9,20 +9,14 @@ import WorkoutScreen from "./WorkoutScreen";
 import CalendarScreen from "./CalendarScreen";
 export default function HomeScreen({ navigation }) {
   const [activeIcon, setActiveIcon] = useState("Home");
-  const changeHomeView = () => {
-    activeIcon === "Home" ? setActiveIcon("Calendar") : setActiveIcon("Home");
-    console.log(activeIcon);
-  };
+  // const changeHomeView = () => {
+  //   activeIcon === "Home" ? setActiveIcon("Calendar") : setActiveIcon("Home");
+  //   console.log(activeIcon);
+  // };
   return (
     <SafeAreaView style={[SafeViewAndroid.AndroidSafeArea, styles.container]}>
       <Header navigation={navigation} />
-      {activeIcon === "Home" ? (
         <WorkoutScreen />
-      ) : (
-        <CalendarScreen/>
-      )}
-
-      <BottomTabs icons={bottomTabsIcons} active={changeHomeView} />
     </SafeAreaView>
   );
 }

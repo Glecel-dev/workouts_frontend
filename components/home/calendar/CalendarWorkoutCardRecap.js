@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderColor: "rgba(191, 191, 191, 0.2)",
     borderWidth: 2,
+    top:120
   },
   headerContainer: {
     borderBottomWidth: 0.5,
