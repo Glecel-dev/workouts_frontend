@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
 import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import RNPickerSelect from "react-native-picker-select";
 import { onLogout, setClientToken } from "../../../services/baseServices/BaseApiKit";
 import { getItem, removeItem } from "../../../SecureStore";
 import { AuthContext } from "../../context";
@@ -46,37 +45,6 @@ export default function Header({ navigation }) {
             />
           </TouchableOpacity>
         </View>
-        {/* <View style={styles.summaryContainer}>
-          <Text style={styles.summaryText}>Your workout summary</Text>
-
-          <View style={styles.pickerContainer}>
-            <RNPickerSelect
-              value={selectedMonth}
-              placeholder={{
-                label: "Select a month...",
-                value: selectedMonth,
-              }}
-              onValueChange={(value, index) => {
-                setSelectedMonth(value);
-                console.log(value, index);
-              }}
-              items={[
-                { label: "January", value: "january" },
-                { label: "February", value: "february" },
-                { label: "March", value: "march" },
-                { label: "April", value: "april" },
-                { label: "May", value: "may" },
-                { label: "June", value: "june" },
-                { label: "July", value: "july" },
-                { label: "August", value: "august" },
-                { label: "September", value: "september" },
-                { label: "October", value: "october" },
-                { label: "November", value: "november" },
-                { label: "December", value: "deccember" },
-              ]}
-            />
-          </View>
-        </View> */}
       </View>
     );
   }

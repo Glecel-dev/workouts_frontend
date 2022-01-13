@@ -1,21 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
 import Header from "../components/home/header/Header";
 import SafeViewAndroid from "../styles/SafeViewAndroid";
-import WorkoutScreen from "./WorkoutScreen";
-
+import WorkoutList from '../components/home/workoutList/WorkoutList'
+import BodyPartsList from '../components/home/bodyPartsStatistics/BodyPartsList';
 export default function HomeScreen({ navigation }) {
   return (
     <SafeAreaView style={[SafeViewAndroid.AndroidSafeArea, styles.container]}>
       <Header navigation={navigation} />
-      <WorkoutScreen />
+      <WorkoutList />
+      <BodyPartsList />
     </SafeAreaView>
   );
 }
-
-
-
 
 const styles = StyleSheet.create({
   container: {

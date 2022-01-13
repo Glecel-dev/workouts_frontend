@@ -45,7 +45,7 @@ const CalendarWorkoutCardRecap = ({navigation}) => {
                 <TouchableOpacity style={styles.modalMenuWrapper}
                                   onPress={() => {
                                     setVisibilityModal(false);
-                                    navigation.push('WorkoutForm')
+                                    navigation.push('WorkoutScreen')
                                   }}
                 >
                   <Text style={styles.modalMenuText}>Add New</Text>

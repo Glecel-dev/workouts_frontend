@@ -7,7 +7,7 @@ import { View } from "react-native";
 import CalendarScreen from "./screens/CalendarScreen";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
-import WorkoutFormScreen from "./screens/WorkoutFormScreen";
+import WorkoutScreen from  './screens/WorkoutScreen'
 const screenOptions = {
   headerShown: false,
 };
@@ -26,7 +26,7 @@ const HomeStackScreen = () => {
   return (
     <HomeStack.Navigator screenOptions={{headerShown:false}}>
       <HomeStack.Screen  options={screenOptions} name="HomeScreen" component={HomeScreen} />
-      <HomeStack.Screen  options={screenOptions} name="WorkoutForm" component={WorkoutFormScreen} />
+      <HomeStack.Screen  options={screenOptions} name="WorkoutScreen" component={WorkoutScreen} />
     </HomeStack.Navigator>
   );
 };
@@ -34,7 +34,7 @@ const CalendarStackScreen = () => {
   return (
     <CalendarStack.Navigator screenOptions={{headerShown:false}}>
       <CalendarStack.Screen  options={screenOptions} name="CalendarScreen" component={CalendarScreen} />
-      <CalendarStack.Screen options={screenOptions} name="WorkoutForm" component={WorkoutFormScreen} />
+      <CalendarStack.Screen options={screenOptions} name="WorkoutScreen" component={WorkoutScreen} />
     </CalendarStack.Navigator>
   );
 };
@@ -59,7 +59,7 @@ export function SignedInStack() {
 
               return <Ionicons name={iconName} size={size} color={color} />;
             },
-            tabBarActiveTintColor: 'tomato',
+            tabBarActiveTintColor: "#1ABC9C",
             tabBarInactiveTintColor: 'gray',
             tabBarBackground: () => (
               <View tint="light" intensity={100} style={{backgroundColor:'transparent'}} ></View>
