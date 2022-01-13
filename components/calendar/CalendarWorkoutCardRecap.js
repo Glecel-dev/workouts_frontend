@@ -9,15 +9,15 @@ import {
   TouchableWithoutFeedback,
   View
 } from "react-native";
-import { WORKOUTS } from "../../../data/Workouts";
+import { WORKOUTS } from "../../data/Workouts";
 import CalendarWorkoutCard from "./CalendarWorkoutCard";
 
-const CalendarWorkoutCardRecap = () => {
+const CalendarWorkoutCardRecap = ({navigation}) => {
   const [visibilityModal, setVisibilityModal] = useState(false);
-  const [isEditPressed, setIsEditPressed] = useState(false)
+  const [isEditPressed, setIsEditPressed] = useState(false);
 
   let [fontsLoaded] = useFonts({
-    Poppins: require("../../../assets/fonts/Poppins-ExtraLight.ttf"),
+    Poppins: require("../../assets/fonts/Poppins-ExtraLight.ttf"),
   });
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -33,12 +33,22 @@ const CalendarWorkoutCardRecap = () => {
           <TouchableWithoutFeedback onPress={() => setVisibilityModal(false)}>
             <View style={styles.modalWrapper}>
               <View style={styles.modalMenuContainer}>
-                <TouchableOpacity style={styles.modalMenuWrapper} onPress={()=>{
-                  setIsEditPressed(true);setVisibilityModal(false)}}>
+                <TouchableOpacity
+                  style={styles.modalMenuWrapper}
+                  onPress={() => {
+                    setIsEditPressed(true);
+                    setVisibilityModal(false);
+                  }}
+                >
                   <Text style={styles.modalMenuText}>Edit</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.modalMenuWrapper}>
-                  <Text style={styles.modalMenuText} >Add New</Text>
+                <TouchableOpacity style={styles.modalMenuWrapper}
+                                  onPress={() => {
+                                    setVisibilityModal(false);
+                                    navigation.push('WorkoutForm')
+                                  }}
+                >
+                  <Text style={styles.modalMenuText}>Add New</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -53,20 +63,19 @@ const CalendarWorkoutCardRecap = () => {
           </TouchableOpacity>
         </View>
         {WORKOUTS.map((workout, index) => (
-          <ConditionalCardRendering key={index} workout={workout}/>
+          <ConditionalCardRendering key={index} workout={workout} />
         ))}
       </View>
     );
   }
-  function ConditionalCardRendering({workout}){
-    if(!isEditPressed){
-      return <CalendarWorkoutCard workout={workout} />
-
-    }else{
+  function ConditionalCardRendering({ workout }) {
+    if (!isEditPressed) {
+      return <CalendarWorkoutCard workout={workout} />;
+    } else {
       return (
-          <TouchableOpacity style={styles.workoutEditedContainer}>
-            <CalendarWorkoutCard workout={workout} />
-          </TouchableOpacity>
+        <TouchableOpacity style={styles.workoutEditedContainer}>
+          <CalendarWorkoutCard workout={workout} />
+        </TouchableOpacity>
       );
     }
   }
@@ -82,7 +91,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderColor: "rgba(191, 191, 191, 0.2)",
     borderWidth: 2,
-    top:120
+    top: 120,
   },
   headerContainer: {
     borderBottomWidth: 0.5,
@@ -121,22 +130,20 @@ const styles = StyleSheet.create({
   },
   modalMenuText: {
     color: "#f5f5f5",
-
   },
-  modalMenuWrapper:{
+  modalMenuWrapper: {
     borderBottomColor: "#1ABC9C",
     borderBottomWidth: 1,
     width: "100%",
-    justifyContent:'space-around',
-    marginBottom:2
+    justifyContent: "space-around",
+    marginBottom: 2,
   },
-  workoutEditedContainer:{
-    backgroundColor:'red',
-    top:0,
-    width:'100%',
-    margin:5,
-  }
+  workoutEditedContainer: {
+    backgroundColor: "red",
+    top: 0,
+    width: "100%",
+    margin: 5,
+  },
 });
-
 
 export default CalendarWorkoutCardRecap;

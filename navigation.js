@@ -7,6 +7,7 @@ import { View } from "react-native";
 import CalendarScreen from "./screens/CalendarScreen";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
+import WorkoutFormScreen from "./screens/WorkoutFormScreen";
 const screenOptions = {
   headerShown: false,
 };
@@ -24,17 +25,20 @@ const CalendarStack = createStackNavigator();
 const HomeStackScreen = () => {
   return (
     <HomeStack.Navigator screenOptions={{headerShown:false}}>
-      <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
+      <HomeStack.Screen  options={screenOptions} name="HomeScreen" component={HomeScreen} />
+      <HomeStack.Screen  options={screenOptions} name="WorkoutForm" component={WorkoutFormScreen} />
     </HomeStack.Navigator>
   );
 };
 const CalendarStackScreen = () => {
   return (
     <CalendarStack.Navigator screenOptions={{headerShown:false}}>
-      <CalendarStack.Screen name="CalendarScreen" component={CalendarScreen} />
+      <CalendarStack.Screen  options={screenOptions} name="CalendarScreen" component={CalendarScreen} />
+      <CalendarStack.Screen options={screenOptions} name="WorkoutForm" component={WorkoutFormScreen} />
     </CalendarStack.Navigator>
   );
 };
+
 const Tab = createBottomTabNavigator();
 
 export function SignedInStack() {

@@ -6,7 +6,7 @@ import React from "react";
 
 const CalendarWorkoutCard = ({workout}) => {
   let [fontsLoaded] = useFonts({
-    Poppins: require('../../../assets/fonts/Poppins-ExtraLight.ttf'),
+    Poppins: require("../../assets/fonts/Poppins-ExtraLight.ttf"),
   });
   if (!fontsLoaded) {
     return <AppLoading />;

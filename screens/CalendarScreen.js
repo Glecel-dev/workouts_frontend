@@ -3,7 +3,7 @@ import { useFonts } from "expo-font";
 import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import CalendarPicker from "react-native-calendar-picker";
-import CalendarWorkoutCardRecap from "../components/home/calendar/CalendarWorkoutCardRecap";
+import CalendarWorkoutCardRecap from "../components/calendar/CalendarWorkoutCardRecap";
 import Header from '../components/home/header/Header'
 export default function CalendarScreen({navigation}) {
   const [selectedStartDate, setSelectedStartDate] = useState(null);
@@ -35,7 +35,7 @@ export default function CalendarScreen({navigation}) {
             dayLabelsWrapper={{ borderColor: "#1ABC9C" }}
           />
         </View>
-        <CalendarWorkoutCardRecap/>
+        <CalendarWorkoutCardRecap navigation={navigation}/>
 
       </View>
     );
