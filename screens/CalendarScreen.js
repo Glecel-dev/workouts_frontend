@@ -48,7 +48,10 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   calendarContainer: {
-
+    shadowRadius: 2.67,
+    shadowOffset: { width: 2, height: 5 },
+    shadowOpacity: 8.97,
+    elevation: 6,
     top: 120,
 
     margin: 5,

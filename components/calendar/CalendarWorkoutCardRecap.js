@@ -3,16 +3,17 @@ import { useFonts } from "expo-font";
 import React, { useState } from "react";
 import {
   Modal,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  View
+  View,
 } from "react-native";
 import { WORKOUTS } from "../../data/Workouts";
 import CalendarWorkoutCard from "./CalendarWorkoutCard";
 
-const CalendarWorkoutCardRecap = ({navigation}) => {
+const CalendarWorkoutCardRecap = ({ navigation }) => {
   const [visibilityModal, setVisibilityModal] = useState(false);
   const [isEditPressed, setIsEditPressed] = useState(false);
 
@@ -42,11 +43,12 @@ const CalendarWorkoutCardRecap = ({navigation}) => {
                 >
                   <Text style={styles.modalMenuText}>Edit</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.modalMenuWrapper}
-                                  onPress={() => {
-                                    setVisibilityModal(false);
-                                    navigation.push('WorkoutScreen')
-                                  }}
+                <TouchableOpacity
+                  style={styles.modalMenuWrapper}
+                  onPress={() => {
+                    setVisibilityModal(false);
+                    navigation.push("WorkoutScreen");
+                  }}
                 >
                   <Text style={styles.modalMenuText}>Add New</Text>
                 </TouchableOpacity>
@@ -62,9 +64,18 @@ const CalendarWorkoutCardRecap = ({navigation}) => {
             <Text style={{ color: "#1ABC9C", fontFamily: "Poppins" }}>ooo</Text>
           </TouchableOpacity>
         </View>
-        {WORKOUTS.map((workout, index) => (
-          <ConditionalCardRendering key={index} workout={workout} />
-        ))}
+        <ScrollView
+          horizontal={false}
+          showsHorizontalScrollIndicator={false}
+          style={{
+            width: "100%",
+            height: 200,
+          }}
+        >
+          {WORKOUTS.map((workout, index) => (
+            <ConditionalCardRendering key={index} workout={workout} />
+          ))}
+        </ScrollView>
       </View>
     );
   }
@@ -74,6 +85,7 @@ const CalendarWorkoutCardRecap = ({navigation}) => {
     } else {
       return (
         <TouchableOpacity style={styles.workoutEditedContainer}>
+          <CalendarWorkoutCard workout={workout} />
           <CalendarWorkoutCard workout={workout} />
         </TouchableOpacity>
       );
@@ -92,6 +104,10 @@ const styles = StyleSheet.create({
     borderColor: "rgba(191, 191, 191, 0.2)",
     borderWidth: 2,
     top: 120,
+    shadowRadius: 2.67,
+    shadowOffset: { width: 2, height: 5 },
+    shadowOpacity: 8.97,
+    elevation: 6,
   },
   headerContainer: {
     borderBottomWidth: 0.5,
@@ -102,6 +118,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     flexDirection: "row",
     marginBottom: 3,
+    
   },
   exercisesCard: {
     width: "100%",

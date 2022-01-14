@@ -149,9 +149,11 @@ export default function AuthNavigation() {
       >
   
             {loginState.userToken !== null ? (
-              <SignedInStack />
+                            <SignedOutStack />
+
             ) : (
-              <SignedOutStack />
+              <SignedInStack />
+
             )}
   
       </LinearGradient>
