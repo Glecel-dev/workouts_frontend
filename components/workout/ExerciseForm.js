@@ -53,7 +53,7 @@ const ExerciseForm = forwardRef((props, ref) => {
     setRowArrayOfInputsData(inputData);
     setTimeout(() => {
       setIsLoading(false);
-    }, 100);
+    }, 50);
   };
   const arrayOfInputsComponent = (index) => {
     return (
@@ -129,7 +129,8 @@ const styles = StyleSheet.create({
     alignItems: "baseline",
     alignContent: "center",
     marginRight: 20,
-    paddingLeft: 20,
+    paddingLeft: 10,
+    marginBottom:7
   },
   textInput: {
     color: "white",

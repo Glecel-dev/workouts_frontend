@@ -1,7 +1,9 @@
 import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
 import React, { useState } from "react";
+import { Platform } from "react-native";
 import {
+  Dimensions,
   Modal,
   ScrollView,
   StyleSheet,
@@ -14,6 +16,7 @@ import { WORKOUTS } from "../../data/Workouts";
 import CalendarWorkoutCard from "./CalendarWorkoutCard";
 
 const CalendarWorkoutCardRecap = ({ navigation }) => {
+
   const [visibilityModal, setVisibilityModal] = useState(false);
   const [isEditPressed, setIsEditPressed] = useState(false);
 
@@ -140,7 +143,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderColor: "transparent",
     borderWidth: 2,
-    marginTop: 500,
+    top: Platform.OS ==='ios'?540:497,
     width: 100,
     height: 60,
     marginLeft: 300,

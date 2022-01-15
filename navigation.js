@@ -7,7 +7,7 @@ import { View } from "react-native";
 import CalendarScreen from "./screens/CalendarScreen";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
-import WorkoutScreen from  './screens/WorkoutScreen'
+import WorkoutScreen from "./screens/WorkoutScreen";
 const screenOptions = {
   headerShown: false,
 };
@@ -15,7 +15,7 @@ const mainTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    background: "transparent",
+    background: "#0f0c29",
   },
 };
 const Stack = createStackNavigator();
@@ -24,17 +24,33 @@ const CalendarStack = createStackNavigator();
 
 const HomeStackScreen = () => {
   return (
-    <HomeStack.Navigator screenOptions={{headerShown:false}}>
-      <HomeStack.Screen  options={screenOptions} name="HomeScreen" component={HomeScreen} />
-      <HomeStack.Screen  options={screenOptions} name="WorkoutScreen" component={WorkoutScreen} />
+    <HomeStack.Navigator screenOptions={{ headerShown: false }}>
+      <HomeStack.Screen
+        options={screenOptions}
+        name="HomeScreen"
+        component={HomeScreen}
+      />
+      <HomeStack.Screen
+        options={screenOptions}
+        name="WorkoutScreen"
+        component={WorkoutScreen}
+      />
     </HomeStack.Navigator>
   );
 };
 const CalendarStackScreen = () => {
   return (
-    <CalendarStack.Navigator screenOptions={{headerShown:false}}>
-      <CalendarStack.Screen  options={screenOptions} name="CalendarScreen" component={CalendarScreen} />
-      <CalendarStack.Screen options={screenOptions} name="WorkoutScreen" component={WorkoutScreen} />
+    <CalendarStack.Navigator screenOptions={{ headerShown: false }}>
+      <CalendarStack.Screen
+        options={screenOptions}
+        name="CalendarScreen"
+        component={CalendarScreen}
+      />
+      <CalendarStack.Screen
+        options={screenOptions}
+        name="WorkoutScreen"
+        component={WorkoutScreen}
+      />
     </CalendarStack.Navigator>
   );
 };
@@ -45,32 +61,38 @@ export function SignedInStack() {
   return (
     <NavigationContainer theme={mainTheme}>
       <Tab.Navigator
-        screenOptions={
-          (({ route }) => ({
-            tabBarIcon: ({ focused, color, size }) => {
-              let iconName;
-              if (route.name === "Home") {
-                iconName = focused
-                  ? "home"
-                  : "home-outline";
-              } else if (route.name === "Calendar") {
-                iconName = focused ? "calendar" : "calendar-outline";
-              }
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
+            if (route.name === "Home") {
+              iconName = focused ? "home" : "home-outline";
+            } else if (route.name === "Calendar") {
+              iconName = focused ? "calendar" : "calendar-outline";
+            }
 
-              return <Ionicons name={iconName} size={size} color={color} />;
-            },
-            tabBarActiveTintColor: "#1ABC9C",
-            tabBarInactiveTintColor: 'gray',
-            tabBarBackground: () => (
-              <View tint="light" intensity={100} style={{backgroundColor:'transparent'}} ></View>
-            ),
-          })
-          )
-        }
-
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+          tabBarActiveTintColor: "#1ABC9C",
+          tabBarInactiveTintColor: "gray",
+          tabBarBackground: () => (
+            <View
+              tint="light"
+              intensity={100}
+              style={{ backgroundColor: "transparent" }}
+            ></View>
+          ),
+        })}
       >
-        <Tab.Screen options={screenOptions} name="Home" component={HomeStackScreen} />
-        <Tab.Screen options={screenOptions} name="Calendar" component={CalendarStackScreen} />
+        <Tab.Screen
+          options={screenOptions}
+          name="Home"
+          component={HomeStackScreen}
+        />
+        <Tab.Screen
+          options={screenOptions}
+          name="Calendar"
+          component={CalendarStackScreen}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );

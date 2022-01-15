@@ -76,7 +76,7 @@ const WorkoutForm = ({ navigation }) => {
                   shadowOpacity: 8.97,
                   elevation: 6,
                   zIndex: 1,
-                  borderRadius: 20,
+                  borderRadius: 30/2,
                 }}
               >
                 <TouchableOpacity
@@ -141,7 +141,7 @@ const WorkoutForm = ({ navigation }) => {
             <ExerciseForm ref={exerciseFormRef} />
           </View>
 
-          <View style={{ width: "100%", alignContent: "center" }}>
+          <View style={{ width: "100%", alignContent: "center", }}>
             <LinearGradient
               // Button Linear Gradient
               colors={["#1ABC9C", "#0096FF"]}
@@ -150,24 +150,21 @@ const WorkoutForm = ({ navigation }) => {
               locations={[0.0, 1.0]}
               style={{
                 position: "absolute",
-                width: 30,
+                width: 40,
                 justifyContent: "center",
-                height: 30,
+                height: 40,
                 alignItems: "center",
-                color: "white",
-                marginLeft: 185,
-                shadowColor: "white",
-                shadowRadius: 2.67,
-                shadowOffset: { width: 2, height: 5 },
-                shadowOpacity: 8.97,
-                elevation: 6,
-                zIndex: 1,
-                borderRadius: 20,
+                marginLeft: 175,
+ 
+                borderRadius: 40/2,
+
+
               }}
             >
               <TouchableOpacity
-                titleSize={20}
+                titleSize={50}
                 onPress={() => exerciseFormRef.current.addComponent()}
+                style={{width:'100%', alignContent:'center',alignItems:'center'}}
               >
                 <Text
                   style={[
@@ -276,6 +273,8 @@ const styles = StyleSheet.create({
     padding: 0,
     margin: 0,
     width: "100%",
+    borderColor:'transparent',
+    height:70
   },
   exerciseFormWrapper: {
     display: "flex",

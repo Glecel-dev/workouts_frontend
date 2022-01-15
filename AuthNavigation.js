@@ -1,12 +1,11 @@
 import {
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
-  NavigationContainer
 } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { LinearGradient } from "expo-linear-gradient";
-import React, { ActivityIndicator, useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { StyleSheet } from "react-native";
 import { AuthContext } from "./components/context";
 import { SignedInStack, SignedOutStack } from "./navigation";
 import { getItem, removeItem, setItem } from "./SecureStore";
@@ -102,7 +101,7 @@ export default function AuthNavigation() {
         }
         dispatch({ type: "LOGOUT" });
       },
-      signUp: async() => {
+      signUp: async () => {
         try {
           await setItem(userToken);
         } catch (e) {
@@ -128,7 +127,7 @@ export default function AuthNavigation() {
       // console.log('user token: ', userToken);
       dispatch({ type: "RETRIEVE_TOKEN", token: userToken });
     }, 1000);
-    console.log(loginState.isLoading)
+    console.log(loginState.isLoading);
   }, []);
 
   const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
@@ -140,29 +139,25 @@ export default function AuthNavigation() {
   //   );
   // }
 
-    return (
-      
-      <AuthContext.Provider value={authContext}>
-      <LinearGradient
-        colors={["#141e30", "#0f0c29", "#0f0c29"]}
-        style={styles.background}
-      >
-  
-            {loginState.userToken !== null ? (
-                            <SignedOutStack />
-
-            ) : (
-              <SignedInStack />
-
-            )}
-  
-      </LinearGradient>
-      </AuthContext.Provider>
-  
-    );
-  
-
-
+  return (
+    <AuthContext.Provider value={authContext}>
+      {loginState.userToken !== null ? (
+        <LinearGradient
+          colors={["#141e30", "#0f0c29", "#0f0c29"]}
+          style={styles.background}
+        >
+          <SignedOutStack />
+        </LinearGradient>
+      ) : (
+        <LinearGradient
+          colors={["#141e30", "#0f0c29", "#0f0c29"]}
+          style={styles.background}
+        >
+          <SignedInStack />
+        </LinearGradient>
+      )}
+    </AuthContext.Provider>
+  );
 }
 const styles = StyleSheet.create({
   background: {

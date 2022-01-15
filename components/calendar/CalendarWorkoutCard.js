@@ -9,7 +9,7 @@ const CalendarWorkoutCard = ({workout}) => {
     Poppins: require("../../assets/fonts/Poppins-ExtraLight.ttf"),
   });
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return <View />;
   } else {
     return (
       <View style={styles.wrapper}>
