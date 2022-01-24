@@ -146,14 +146,16 @@ export default function AuthNavigation() {
           colors={["#141e30", "#0f0c29", "#0f0c29"]}
           style={styles.background}
         >
-          <SignedOutStack />
+                    <SignedInStack />
+
         </LinearGradient>
       ) : (
         <LinearGradient
           colors={["#141e30", "#0f0c29", "#0f0c29"]}
           style={styles.background}
         >
-          <SignedInStack />
+                    <SignedOutStack />
+
         </LinearGradient>
       )}
     </AuthContext.Provider>

@@ -5,9 +5,9 @@ let BaseApiKit = axios.create({
   baseURL: "http://10.0.2.2:8000",
   // baseURL: "http://127.0.0.1:8000",
   headers:{
-    'Content-Type': 'application/x-www-form-urlencoded',
+    // 'Content-Type': 'application/x-www-form-urlencoded',
     'Accept': 'application/json',
-    'Access-Control-Allow-Origin': '*'
+    // 'Access-Control-Allow-Origin': '*'
 
 }
 });
